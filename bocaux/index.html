@@ -94,13 +94,36 @@ function lire(k, d) { try { const v = localStorage.getItem('bocaux.' + k); retur
 const reglages = { son: lire('son', true) };
 
 // ───────────────────────── sons (synthèse, pas de fichier) ─────────────────────────
+// Sons enregistrés (assets/sons/) : cris des créatures et voix du Glouton, découpés depuis Game/Assets/Audio/.
+const SONS = ['cri-rouge', 'cri-bleu', 'cri-jaune', 'cri-jaune-2', 'cri-vert', 'cri-violet', 'cri-rose', 'cri-orange', 'cri-cyan',
+  'glouton-mastication', 'glouton-rot', 'glouton-faim', 'glouton-grimace', 'glouton-danse'];
 const Son = (() => {
   let ac = null;
+  const bruts = {}, tampons = {}, derniers = {};
+  SONS.forEach(n => fetch('assets/sons/' + n + '.mp3').then(r => r.ok ? r.arrayBuffer() : null).then(b => { if (b) { bruts[n] = b; decoder(); } }).catch(() => {}));
+  function decoder() {
+    if (!ac) return;
+    for (const [n, b] of Object.entries(bruts)) {
+      delete bruts[n];
+      ac.decodeAudioData(b, t => { tampons[n] = t; }, () => {});
+    }
+  }
   function ok() {
     if (!reglages.son) return null;
-    try { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); } catch (e) { return null; }
+    try { if (!ac) { ac = new (window.AudioContext || window.webkitAudioContext)(); decoder(); } if (ac.state === 'suspended') ac.resume(); } catch (e) { return null; }
     return ac;
   }
+  // Joue un son enregistré ; « garde » évite de le relancer trop souvent (ms).
+  function jouer(nom, vol, vitesse, garde) {
+    const a = ok(); if (!a || !tampons[nom]) return;
+    const t = performance.now();
+    if (garde && derniers[nom] && t - derniers[nom] < garde) return;
+    derniers[nom] = t;
+    const s = a.createBufferSource(), g = a.createGain();
+    s.buffer = tampons[nom]; s.playbackRate.value = vitesse || 1; g.gain.value = vol === undefined ? 1 : vol;
+    s.connect(g).connect(a.destination); s.start();
+  }
+  const varie = () => .93 + Math.random() * .14;
   function bip(freq, dur, type, vol, glisse, delai) {
     const a = ok(); if (!a) return;
     const t = a.currentTime + (delai || 0);
@@ -124,7 +147,14 @@ const Son = (() => {
   }
   return {
     reveil: ok,
-    croque: k => bip(520 * Math.pow(2, Math.min(k, 18) / 12), .09, 'triangle', .22, 1.6),
+    // cri de la créature (Banancoucou a deux cris, joués au hasard)
+    cri: c => jouer(c === 'jaune' && Math.random() < .5 ? 'cri-jaune-2' : 'cri-' + c, .85, varie(), 120),
+    mastication: () => jouer('glouton-mastication', .6, varie(), 260),
+    rotBloc: () => jouer('glouton-rot', .55, 1.15, 600),
+    faim: () => jouer('glouton-faim', .8),
+    grimace: () => jouer('glouton-grimace', .8, 1, 1500),
+    danse: () => jouer('glouton-danse', .7, 1, 2500),
+    croque: k => bip(520 * Math.pow(2, Math.min(k, 18) / 12), .09, 'triangle', .14, 1.6),
     whoosh: () => bruit(.22, .5, 600, 2600),
     pose: () => { bip(140, .12, 'sine', .35, .5); bruit(.08, .25, 300, 200); },
     refus: () => { bip(150, .16, 'square', .12, .7); bip(110, .16, 'square', .1, .7, .07); },
@@ -136,7 +166,7 @@ const Son = (() => {
     place: () => [523, 784].forEach((f, i) => bip(f, .16, 'triangle', .2, 1, i * .08)),
     defile: () => { for (let i = 0; i < 8; i++) bip(700 + i * 40, .04, 'triangle', .06, 1, i * .09); },
     victoire: () => [523, 659, 784, 1047].forEach((f, i) => bip(f, .22, 'triangle', .22, 1, i * .11)),
-    rot: () => { bip(95, .55, 'sawtooth', .22, .6); bip(140, .4, 'square', .06, .5, .05); },
+    rot: () => { if (tampons['glouton-rot']) jouer('glouton-rot', 1); else { bip(95, .55, 'sawtooth', .22, .6); bip(140, .4, 'square', .06, .5, .05); } },
     defaite: () => [392, 370, 349, 262].forEach((f, i) => bip(f, .3, 'triangle', .2, .97, i * .22)),
   };
 })();
@@ -309,7 +339,7 @@ function toucherBocal(id) {
     Regles.sortir(m, id, true);
     P.piment = false; m.boosters.piment--; P.boostersUtilises++; m.boostersUtilises++;
     b.arrive = false;
-    Son.piment(); vibre([20, 30, 40]);
+    Son.piment(); Son.cri(b.couleur); vibre([20, 30, 40]);
     sortieAnimee(b, true);
     return;
   }
@@ -319,7 +349,7 @@ function toucherBocal(id) {
   Regles.sortir(m, id);
   b.arrive = false;
   P.touches++;
-  Son.whoosh(); vibre(8);
+  Son.whoosh(); Son.cri(b.couleur); vibre(8);
   sortieAnimee(b, false);
 }
 function refus(b, bl) { b.v.tremble = 1; bl.v.flash = 1; Son.refus(); vibre([25, 30, 25]); }
@@ -436,6 +466,7 @@ function envolerBocal(b) {
 }
 function finCombo() {
   const bo = bouche();
+  if (P.combo >= 8) Son.danse();
   if (P.combo >= 2) texte('+' + P.combo + ' Miam !', bo.x, bo.y - 54, P.combo >= 10 ? '#EE4B3F' : P.combo >= 6 ? '#F28C28' : VIOLET, Math.min(40, 22 + P.combo * 1.2), 1300);
   P.combo = 0;
 }
@@ -450,11 +481,11 @@ function bouchee(couleur, src) {
   P.expression = 'mastication'; P.exprChrono = 170;
   const b = bouche();
   for (let i = 0; i < 4; i++) particule(b.x, b.y, COUL[couleur], 'miette');
-  Son.croque(P.combo); vibre(5);
+  Son.croque(P.combo); Son.mastication(); vibre(5);
   if (a.n <= 0) {
     P.teteAff++;
     for (let i = 0; i < 22; i++) particule(b.x, b.y - 10, i % 2 ? COUL[couleur] : '#fff', 'confetti');
-    if (P.teteAff < P.aff.length) { Son.bloc(); vibre([15, 40, 15]); }
+    if (P.teteAff < P.aff.length) { Son.bloc(); Son.rotBloc(); vibre([15, 40, 15]); }
   }
 }
 
@@ -478,6 +509,7 @@ function maj(dt) {
   // arrivée de la foule : elle défile le long du chemin jusqu'à sa place
   if (P.arrivee > 0) {
     P.arrivee = Math.max(0, P.arrivee - dt / 1500);
+    if (P.arrivee === 0) Son.faim(); // la foule est en place : le Glouton a faim
     if (!P.defileJoue) { P.defileJoue = true; Son.defile(); }
   }
   const pret = P.arrivee <= 0;
@@ -520,7 +552,7 @@ function maj(dt) {
   // tension du banc
   const libres = m.banc.filter(x => x === null).length;
   const tension = !P.fini && libres <= 1 && m.bocaux.some(b => b.etat === 'plateau');
-  if (tension && !P.tension) { Son.tension(); vibre([30, 60, 30]); }
+  if (tension && !P.tension) { Son.grimace(); vibre([30, 60, 30]); }
   P.tension = tension;
   if (tension && P.exprChrono <= 0 && !P.fini) P.expression = 'grimace';
   else if (!tension && P.expression === 'grimace' && !P.fini) P.expression = 'faim';
@@ -867,6 +899,7 @@ function victoire() {
   texte('BURP !', b.x, b.y - 60, VIOLET, 38, 1400);
   for (let i = 0; i < 70; i++) setTimeout(() => particule(40 + Math.random() * 310, L.chemin.y + 30, ['#EE4B3F', '#3D8BEB', '#F5C02A', '#4CB944', '#9B5DE5', '#F27BB0'][i % 6], 'confetti'), i * 12);
   setTimeout(() => Son.victoire(), 700);
+  setTimeout(() => Son.danse(), 1300);
   const etoiles = P.boostersUtilises === 0 ? 3 : P.boostersUtilises <= 1 ? 2 : 1;
   const fait = lire('etoiles', {}); fait[numNiveau] = Math.max(fait[numNiveau] || 0, etoiles); stocker('etoiles', fait);
   setTimeout(() => {
