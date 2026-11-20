@@ -34,7 +34,7 @@ Différence avec le C# : ici le Glouton mange au rythme des animations (une cré
 | `regles.js` | La règle, sans affichage (utilisée par le jeu et par l'outil) |
 | `levels/niveau-0N.json` | Les 6 niveaux, **au format commun avec le C#** (`width`, `jars`, `cravings`… voir `docs/MECANIQUE-B.md`) |
 | `assets/` | Vrais sprites de `Game/Assets/Art/` (créatures, Glouton, boosters, pièce) et `concept/v2/bocal-chariot.png`, recadrés et réduits (moins de 1 Mo au total) |
-| `assets/sons/` | Cris retenus des créatures et voix du Glouton (`Game/Assets/Audio/`, choix de `sons/README.md`), silences coupés, ~1,3 s par cri, volume normalisé, MP3 mono (192 Ko) |
+| `assets/sons/` | Cris retenus et voix du Glouton (`Game/Assets/Audio/`), sons « jus » de Mathja (PR #111) et cris v5/v6 de la Tomatoque (PR #98), en MP3 mono (324 Ko) |
 | `outils/niveaux.mjs` | Solveur et générateur des niveaux |
 
 Champs ajoutés au format commun, ignorés par le C# : `name`, `boosters` (stock de départ) et `check` (solution trouvée, taux de victoire).
@@ -43,10 +43,12 @@ Couleurs et créatures : rouge Tomatoque, bleu Pingouglaçon, jaune Banancoucou,
 
 ## Sons
 
-- **cri de la créature** quand son bocal sort (Banancoucou : ses deux cris au hasard), avec une légère variation de hauteur ;
-- **mastication** du Glouton pendant les bouchées (une fois toutes les 260 ms au plus), par-dessus un petit « pop » qui monte avec le combo ;
-- **rot** quand une fringale est finie et à la victoire, **faim** quand la foule est en place, **grimace** quand il ne reste qu'une place, **danse** sur un combo de 8 et à la victoire ;
-- refus, roulement, pose et boosters : sons de synthèse.
+Doux et « ASMR », jamais agressifs : tout passe par un compresseur commun, aucun bip aigu.
+
+- **sons « jus » de Mathja** (PR #111, deux variantes jouées au hasard) : *tic* au toucher accepté, *pof* à l'arrivée sur le banc (plus grave quand le banc se remplit), *bonk* au refus, *cœur* quand il ne reste qu'une place, *ouf* quand on s'en sort, *carillon en bois* pour la place en plus, *ting* pour chaque fringale finie et pour les étoiles (+2 demi-tons par étoile), *gloups* pendant les bouchées ;
+- **cri de la créature** quand son bocal sort, un toutes les 450 ms au plus (Tomatoque : nouveaux cris v5 et v6 de la PR #98 ; Banancoucou : v1 et v2) ;
+- **voix du Glouton** : mastication (une fois toutes les 420 ms au plus), rot quand une fringale est finie et à la victoire, faim quand la foule est en place, grimace avec le cœur, danse sur un combo de 8 ;
+- **clics de synthèse façon clavier mécanique « creamy »** : un « thock » grave et feutré (corps sinus court, clic passe-bas, petit retour de touche) sous chaque toucher, chaque bouton et chaque bouchée.
 
 ## Les niveaux
 
