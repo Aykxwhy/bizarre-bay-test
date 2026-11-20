@@ -1,0 +1,41 @@
+{
+  "id": 2,
+  "tier": "normal",
+  "width": 4,
+  "height": 4,
+  "bench": 6,
+  "jars": [
+    { "x": 2, "y": 2, "color": "rouge", "count": 5, "dir": "gauche" },
+    { "x": 0, "y": 3, "color": "vert", "count": 5, "dir": "bas" },
+    { "x": 3, "y": 2, "color": "jaune", "count": 4, "dir": "haut" },
+    { "x": 1, "y": 0, "color": "vert", "count": 4, "dir": "haut" },
+    { "x": 1, "y": 1, "color": "vert", "count": 5, "dir": "bas" },
+    { "x": 2, "y": 1, "color": "rouge", "count": 6, "dir": "droite" },
+    { "x": 1, "y": 3, "color": "jaune", "count": 6, "dir": "bas" },
+    { "x": 2, "y": 3, "color": "bleu", "count": 6, "dir": "bas" },
+    { "x": 3, "y": 1, "color": "jaune", "count": 3, "dir": "droite" },
+    { "x": 0, "y": 0, "color": "rouge", "count": 4, "dir": "gauche" },
+    { "x": 3, "y": 0, "color": "bleu", "count": 5, "dir": "droite" },
+    { "x": 2, "y": 0, "color": "bleu", "count": 5, "dir": "haut" }
+  ],
+  "cravings": [
+    { "color": "jaune", "count": 13 },
+    { "color": "rouge", "count": 9 },
+    { "color": "bleu", "count": 7 },
+    { "color": "rouge", "count": 6 },
+    { "color": "bleu", "count": 9 },
+    { "color": "vert", "count": 14 }
+  ],
+  "name": "La pile",
+  "boosters": {
+    "aimant": 2,
+    "piment": 1,
+    "place": 1
+  },
+  "check": {
+    "solvable": true,
+    "solution": [ 6, 8, 0, 1, 3, 4, 10, 2, 5, 7, 9, 11 ],
+    "randomWinRate": 0.115,
+    "simplePlayerWinRate": 0.58
+  }
+}

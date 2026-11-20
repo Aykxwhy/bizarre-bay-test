@@ -1,0 +1,47 @@
+{
+  "id": 3,
+  "tier": "normal",
+  "width": 5,
+  "height": 5,
+  "bench": 6,
+  "jars": [
+    { "x": 1, "y": 1, "color": "vert", "count": 3, "dir": "droite" },
+    { "x": 4, "y": 4, "color": "rouge", "count": 3, "dir": "gauche" },
+    { "x": 0, "y": 2, "color": "vert", "count": 5, "dir": "haut" },
+    { "x": 0, "y": 1, "color": "vert", "count": 5, "dir": "gauche" },
+    { "x": 3, "y": 3, "color": "violet", "count": 5, "dir": "droite" },
+    { "x": 1, "y": 3, "color": "rouge", "count": 3, "dir": "bas" },
+    { "x": 2, "y": 1, "color": "bleu", "count": 6, "dir": "droite" },
+    { "x": 1, "y": 2, "color": "rouge", "count": 4, "dir": "droite" },
+    { "x": 2, "y": 3, "color": "vert", "count": 4, "dir": "bas" },
+    { "x": 4, "y": 1, "color": "rouge", "count": 5, "dir": "droite" },
+    { "x": 0, "y": 3, "color": "rouge", "count": 3, "dir": "bas" },
+    { "x": 3, "y": 4, "color": "violet", "count": 5, "dir": "bas" },
+    { "x": 2, "y": 2, "color": "bleu", "count": 3, "dir": "droite" },
+    { "x": 1, "y": 0, "color": "violet", "count": 3, "dir": "haut" },
+    { "x": 0, "y": 0, "color": "bleu", "count": 6, "dir": "haut" },
+    { "x": 4, "y": 3, "color": "bleu", "count": 3, "dir": "droite" },
+    { "x": 3, "y": 0, "color": "bleu", "count": 3, "dir": "haut" },
+    { "x": 4, "y": 2, "color": "violet", "count": 6, "dir": "droite" }
+  ],
+  "cravings": [
+    { "color": "bleu", "count": 8 },
+    { "color": "rouge", "count": 10 },
+    { "color": "vert", "count": 17 },
+    { "color": "bleu", "count": 13 },
+    { "color": "rouge", "count": 8 },
+    { "color": "violet", "count": 19 }
+  ],
+  "name": "Embouteillage",
+  "boosters": {
+    "aimant": 2,
+    "piment": 2,
+    "place": 1
+  },
+  "check": {
+    "solvable": true,
+    "solution": [ 14, 15, 5, 9, 10, 3, 2, 8, 4, 6, 0, 16, 11, 1, 17, 12, 7, 13 ],
+    "randomWinRate": 0.005,
+    "simplePlayerWinRate": 0.4275
+  }
+}

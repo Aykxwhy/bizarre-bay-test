@@ -1,0 +1,53 @@
+{
+  "id": 4,
+  "tier": "difficile",
+  "width": 5,
+  "height": 6,
+  "bench": 6,
+  "jars": [
+    { "x": 4, "y": 2, "color": "bleu", "count": 3, "dir": "gauche" },
+    { "x": 2, "y": 1, "color": "bleu", "count": 6, "dir": "gauche" },
+    { "x": 3, "y": 0, "color": "rouge", "count": 3, "dir": "haut" },
+    { "x": 4, "y": 1, "color": "vert", "count": 6, "dir": "droite" },
+    { "x": 2, "y": 5, "color": "vert", "count": 6, "dir": "bas" },
+    { "x": 1, "y": 0, "color": "bleu", "count": 6, "dir": "bas" },
+    { "x": 1, "y": 5, "color": "orange", "count": 6, "dir": "bas" },
+    { "x": 1, "y": 4, "color": "violet", "count": 6, "dir": "droite" },
+    { "x": 3, "y": 2, "color": "violet", "count": 3, "dir": "bas" },
+    { "x": 2, "y": 2, "color": "vert", "count": 5, "dir": "gauche" },
+    { "x": 0, "y": 0, "color": "rouge", "count": 4, "dir": "haut" },
+    { "x": 4, "y": 0, "color": "orange", "count": 4, "dir": "haut" },
+    { "x": 2, "y": 0, "color": "vert", "count": 4, "dir": "haut" },
+    { "x": 2, "y": 3, "color": "violet", "count": 6, "dir": "droite" },
+    { "x": 3, "y": 5, "color": "orange", "count": 6, "dir": "bas" },
+    { "x": 4, "y": 5, "color": "orange", "count": 6, "dir": "droite" },
+    { "x": 0, "y": 4, "color": "violet", "count": 3, "dir": "bas" },
+    { "x": 1, "y": 3, "color": "bleu", "count": 4, "dir": "gauche" },
+    { "x": 4, "y": 4, "color": "vert", "count": 4, "dir": "droite" },
+    { "x": 4, "y": 3, "color": "rouge", "count": 4, "dir": "droite" },
+    { "x": 0, "y": 1, "color": "violet", "count": 6, "dir": "gauche" },
+    { "x": 0, "y": 2, "color": "rouge", "count": 6, "dir": "gauche" },
+    { "x": 0, "y": 5, "color": "rouge", "count": 3, "dir": "gauche" },
+    { "x": 0, "y": 3, "color": "bleu", "count": 6, "dir": "gauche" }
+  ],
+  "cravings": [
+    { "color": "vert", "count": 25 },
+    { "color": "orange", "count": 22 },
+    { "color": "bleu", "count": 14 },
+    { "color": "rouge", "count": 20 },
+    { "color": "bleu", "count": 11 },
+    { "color": "violet", "count": 24 }
+  ],
+  "name": "Le grand rangement",
+  "boosters": {
+    "aimant": 2,
+    "piment": 2,
+    "place": 1
+  },
+  "check": {
+    "solvable": true,
+    "solution": [ 3, 4, 12, 18, 2, 6, 7, 10, 21, 9, 11, 14, 15, 23, 17, 5, 19, 22, 8, 0, 13, 16, 20, 1 ],
+    "randomWinRate": 0,
+    "simplePlayerWinRate": 0.3025
+  }
+}

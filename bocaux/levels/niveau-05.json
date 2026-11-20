@@ -1,0 +1,59 @@
+{
+  "id": 5,
+  "tier": "tres_difficile",
+  "width": 6,
+  "height": 6,
+  "bench": 6,
+  "jars": [
+    { "x": 1, "y": 1, "color": "orange", "count": 5, "dir": "gauche" },
+    { "x": 4, "y": 4, "color": "rouge", "count": 3, "dir": "droite" },
+    { "x": 0, "y": 0, "color": "rose", "count": 6, "dir": "haut" },
+    { "x": 2, "y": 5, "color": "violet", "count": 3, "dir": "gauche" },
+    { "x": 5, "y": 5, "color": "rose", "count": 5, "dir": "droite" },
+    { "x": 3, "y": 1, "color": "bleu", "count": 5, "dir": "haut" },
+    { "x": 3, "y": 0, "color": "violet", "count": 6, "dir": "haut" },
+    { "x": 3, "y": 4, "color": "rose", "count": 6, "dir": "bas" },
+    { "x": 3, "y": 2, "color": "rose", "count": 5, "dir": "gauche" },
+    { "x": 4, "y": 0, "color": "orange", "count": 3, "dir": "droite" },
+    { "x": 1, "y": 4, "color": "rouge", "count": 5, "dir": "gauche" },
+    { "x": 3, "y": 3, "color": "bleu", "count": 6, "dir": "gauche" },
+    { "x": 2, "y": 2, "color": "violet", "count": 4, "dir": "haut" },
+    { "x": 1, "y": 2, "color": "violet", "count": 5, "dir": "gauche" },
+    { "x": 4, "y": 3, "color": "rouge", "count": 4, "dir": "droite" },
+    { "x": 2, "y": 1, "color": "violet", "count": 5, "dir": "haut" },
+    { "x": 5, "y": 0, "color": "vert", "count": 6, "dir": "haut" },
+    { "x": 2, "y": 3, "color": "bleu", "count": 3, "dir": "gauche" },
+    { "x": 1, "y": 0, "color": "bleu", "count": 6, "dir": "haut" },
+    { "x": 0, "y": 5, "color": "rouge", "count": 6, "dir": "gauche" },
+    { "x": 3, "y": 5, "color": "rouge", "count": 3, "dir": "bas" },
+    { "x": 5, "y": 4, "color": "vert", "count": 5, "dir": "droite" },
+    { "x": 0, "y": 3, "color": "rose", "count": 4, "dir": "gauche" },
+    { "x": 5, "y": 1, "color": "orange", "count": 5, "dir": "droite" },
+    { "x": 5, "y": 3, "color": "orange", "count": 3, "dir": "droite" },
+    { "x": 2, "y": 0, "color": "vert", "count": 6, "dir": "haut" },
+    { "x": 0, "y": 1, "color": "vert", "count": 5, "dir": "gauche" },
+    { "x": 0, "y": 2, "color": "vert", "count": 3, "dir": "gauche" },
+    { "x": 4, "y": 5, "color": "bleu", "count": 5, "dir": "bas" },
+    { "x": 0, "y": 4, "color": "orange", "count": 6, "dir": "gauche" }
+  ],
+  "cravings": [
+    { "color": "vert", "count": 25 },
+    { "color": "violet", "count": 23 },
+    { "color": "rouge", "count": 21 },
+    { "color": "orange", "count": 22 },
+    { "color": "bleu", "count": 25 },
+    { "color": "rose", "count": 26 }
+  ],
+  "name": "Le festin",
+  "boosters": {
+    "aimant": 2,
+    "piment": 2,
+    "place": 1
+  },
+  "check": {
+    "solvable": true,
+    "solution": [ 16, 21, 25, 26, 27, 6, 13, 15, 12, 0, 1, 2, 4, 19, 3, 20, 24, 14, 29, 10, 9, 23, 5, 18, 28, 7, 8, 22, 17, 11 ],
+    "randomWinRate": 0,
+    "simplePlayerWinRate": 0.0375
+  }
+}
