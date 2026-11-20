@@ -1,35 +1,16 @@
 {
   "id": 1,
-  "tier": "facile",
+  "tier": "tutoriel",
   "width": 3,
-  "height": 4,
+  "height": 1,
   "bench": 6,
   "jars": [
-    { "x": 2, "y": 1, "color": "rouge", "count": 5, "dir": "droite" },
-    { "x": 0, "y": 2, "color": "rouge", "count": 3, "dir": "droite" },
-    { "x": 2, "y": 0, "color": "jaune", "count": 5, "dir": "gauche" },
-    { "x": 1, "y": 2, "color": "bleu", "count": 4, "dir": "bas" },
-    { "x": 0, "y": 0, "color": "rouge", "count": 4, "dir": "gauche" },
-    { "x": 2, "y": 3, "color": "bleu", "count": 5, "dir": "droite" },
-    { "x": 1, "y": 1, "color": "jaune", "count": 4, "dir": "haut" },
-    { "x": 0, "y": 3, "color": "bleu", "count": 6, "dir": "gauche" }
+    { "x": 0, "y": 0, "color": "rouge", "count": 5, "dir": "droite" },
+    { "x": 1, "y": 0, "color": "rouge", "count": 5, "dir": "haut" },
+    { "x": 2, "y": 0, "color": "bleu", "count": 4, "dir": "haut" }
   ],
-  "cravings": [
-    { "color": "jaune", "count": 9 },
-    { "color": "bleu", "count": 9 },
-    { "color": "rouge", "count": 12 },
-    { "color": "bleu", "count": 6 }
-  ],
-  "name": "Premiers bocaux",
-  "boosters": {
-    "aimant": 1,
-    "piment": 1,
-    "place": 1
-  },
-  "check": {
-    "solvable": true,
-    "solution": [ 6, 0, 3, 1, 4, 2, 5, 7 ],
-    "randomWinRate": 0.5775,
-    "simplePlayerWinRate": 0.8775
-  }
+  "cravings": [ { "color": "rouge", "count": 10 }, { "color": "bleu", "count": 4 } ],
+  "name": "Le premier bocal",
+  "boosters": { "aimant": 0, "piment": 0, "place": 0 },
+  "check": { "solvable": true, "solution": [1, 2, 0], "randomWinRate": 1, "simplePlayerWinRate": 1 }
 }
