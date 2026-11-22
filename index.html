@@ -54,7 +54,15 @@
         productName: "Gobe-Tout",
         productVersion: "0.1.0",
         matchWebGLToCanvasSize: true,
-        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+        // W1 : la sauvegarde (persistentDataPath, IndexedDB) est écrite dans le navigateur à chaque écriture ;
+        // sans cette option, la progression est perdue au rechargement de la page.
+        autoSyncPersistentDataPath: true,
+        // W2 : « ?dpr=1 » dans l'adresse rend à la résolution CSS, pour comparer le ralentissement d'une longue partie.
+        devicePixelRatio: (function () {
+          var m = /[?&]dpr=([0-9.]+)/.exec(window.location.search);
+          var max = m ? Math.max(0.5, Math.min(parseFloat(m[1]) || 2, 2)) : 2;
+          return Math.min(window.devicePixelRatio || 1, max);
+        })(),
       };
       var script = document.createElement("script");
       script.src = "Build/Web.loader.js";
